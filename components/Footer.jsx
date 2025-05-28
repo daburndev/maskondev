@@ -5,9 +5,17 @@ import { motion } from "framer-motion";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const navItems = [
+    { id: "vision", text: "vision", icon: "👁️" },
+    { id: "portfolio", text: "portfolio", icon: "🎨" },
+    { id: "drop", text: "drop", icon: "🎧" },
+    { id: "journal", text: "journal", icon: "📝" },
+    { id: "contact", text: "contact", icon: "✉️" },
+  ];
+
   return (
-    <footer className="bg-black py-10 px-6 md:px-12 border-t border-off-white/10">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="bg-black py-10 px-6 md:px-12 border-t border-off-white/10 mb-16 md:mb-0">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-6">
         <div className="flex flex-col items-center md:items-start">
           <motion.div
             initial={{ opacity: 0 }}
@@ -22,14 +30,15 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex gap-8">
-          {["vision", "portfolio", "drop", "journal", "contact"].map((item) => (
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex gap-8">
+          {navItems.map((item) => (
             <a
-              key={item}
-              href={`#${item}`}
+              key={item.id}
+              href={`#${item.id}`}
               className="uppercase text-off-white/60 hover:text-money-green transition-colors text-xs tracking-wider"
             >
-              {item}
+              {item.text}
             </a>
           ))}
         </div>

@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Portfolio from "../components/Portfolio";
 import TheDrop from "../components/TheDrop";
+import TheJournal from "../components/TheJournal";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
 export default function Home() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -20,11 +22,19 @@ export default function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const navItems = [
+    { id: "vision", text: "vision", icon: "👁️" },
+    { id: "portfolio", text: "portfolio", icon: "🎨" },
+    { id: "drop", text: "drop", icon: "🎧" },
+    { id: "journal", text: "journal", icon: "📝" },
+    { id: "contact", text: "contact", icon: "✉️" },
+  ];
+
   return (
     <>
       {/* Custom cursor */}
       <motion.div
-        className="fixed w-6 h-6 rounded-full bg-money-green mix-blend-difference pointer-events-none z-50"
+        className="fixed w-6 h-6 rounded-full bg-money-green mix-blend-difference pointer-events-none z-50 hidden md:block"
         animate={{
           x: cursorPosition.x - 12,
           y: cursorPosition.y - 12,
@@ -33,23 +43,106 @@ export default function Home() {
         transition={{ duration: 0.15, ease: "linear" }}
       />
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-40">
+      {/* Navigation - Desktop */}
+      <nav className="fixed top-0 left-0 w-full px-6 py-4 flex justify-between items-center z-40 bg-black/80 backdrop-blur-sm">
         <div className="mask-text text-2xl font-heading">MASK.ON</div>
-        <div className="flex gap-8">
-          {["vision", "portfolio", "drop", "journal", "contact"].map((item) => (
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex gap-8">
+          {navItems.map((item) => (
             <a
-              key={item}
-              href={`#${item}`}
+              key={item.id}
+              href={`#${item.id}`}
               className="uppercase text-off-white hover:text-money-green transition-colors text-sm tracking-wider"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              {item}
+              {item.text}
             </a>
           ))}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-off-white p-1 focus:outline-none"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          ) : (
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 6H20M4 12H20M4 18H20"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </button>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <motion.div
+          className="fixed inset-0 bg-black z-30 pt-20 px-6 flex flex-col md:hidden"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.3 }}
+        >
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="py-4 border-b border-off-white/10 flex items-center gap-3 text-off-white hover:text-money-green"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="text-xl">{item.icon}</span>
+              <span className="uppercase tracking-wider font-heading">
+                {item.text}
+              </span>
+            </a>
+          ))}
+        </motion.div>
+      )}
+
+      {/* Mobile Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm py-2 px-4 flex justify-between items-center z-40 border-t border-off-white/10 md:hidden">
+        {navItems.map((item) => (
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            className="flex flex-col items-center text-off-white/70 hover:text-money-green p-2"
+          >
+            <span className="text-xl mb-1">{item.icon}</span>
+            <span className="text-[10px] uppercase tracking-wider">
+              {item.text}
+            </span>
+          </a>
+        ))}
+      </div>
 
       {/* Hero Section */}
       <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden vhs-overlay">
@@ -137,37 +230,8 @@ export default function Home() {
       {/* The Drop Section */}
       <TheDrop />
 
-      {/* Journal Section - Simplified */}
-      <section
-        id="journal"
-        className="min-h-screen bg-black py-20 px-6 md:px-12"
-      >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-5xl md:text-6xl font-heading mb-12 mask-text">
-            THE JOURNAL
-          </h2>
-          <p className="text-lg text-off-white/80 mb-12">
-            Thoughts on art, tech, and the culture. Coming soon.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[1, 2, 3, 4].map((item) => (
-              <div
-                key={item}
-                className="border border-off-white/10 p-8 rounded-sm hover:border-money-green/30 transition-colors"
-              >
-                <p className="text-money-green text-sm mb-2">Coming Soon</p>
-                <h3 className="text-xl font-heading mb-4">
-                  Journal Entry #{item}
-                </h3>
-                <p className="text-off-white/70 mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl.
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Journal Section */}
+      <TheJournal />
 
       {/* Contact Section */}
       <Contact />

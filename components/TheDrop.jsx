@@ -6,30 +6,21 @@ import { motion } from "framer-motion";
 const beats = [
   {
     id: 1,
-    title: "Digital Hustle",
-    price: "$29",
-    duration: "2:34",
+    title: "Maskoff Remix",
+    price: "$00",
+    duration: "4:20",
     bpm: 140,
-    tags: ["trap", "dark", "ambient"],
-    audio: "/placeholder-beat-1.mp3",
+    tags: ["mask off", "future", "atlanta"],
+    audio: "/maskoffremix.mp3",
   },
   {
     id: 2,
-    title: "Mask Off Flip",
-    price: "$49",
+    title: "Not Like Us Remix",
+    price: "$00",
     duration: "3:12",
     bpm: 130,
-    tags: ["flip", "remix", "future"],
-    audio: "/placeholder-beat-2.mp3",
-  },
-  {
-    id: 3,
-    title: "Code Flow",
-    price: "$39",
-    duration: "2:47",
-    bpm: 128,
-    tags: ["lofi", "electronic", "chill"],
-    audio: "/placeholder-beat-3.mp3",
+    tags: ["not like us", "kendrick lamar", "westcoast"],
+    audio: "/notlikeusremix.mp3",
   },
 ];
 
@@ -89,12 +80,15 @@ export default function TheDrop() {
   }, []);
 
   return (
-    <section id="drop" className="min-h-screen bg-black py-20 px-6 md:px-12">
+    <section
+      id="drop"
+      className="min-h-screen bg-black py-20 px-6 md:px-12 pb-24 md:pb-20"
+    >
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-heading mb-12 mask-text">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading mb-8 md:mb-12 mask-text">
           THE DROP
         </h2>
-        <p className="text-lg text-off-white/80 mb-12 font-body max-w-2xl">
+        <p className="text-base md:text-lg text-off-white/80 mb-8 md:mb-12 font-body max-w-2xl">
           Premium beats and digital assets. Chase a check, never chase a vibe.
         </p>
 
@@ -102,31 +96,31 @@ export default function TheDrop() {
           <audio ref={audioRef} />
 
           {currentBeat && (
-            <div className="bg-black border border-money-green/50 p-6 mb-8 rounded-sm">
-              <div className="flex justify-between items-center mb-4">
+            <div className="bg-black border border-money-green/50 p-4 md:p-6 mb-6 md:mb-8 rounded-sm">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
                 <div>
-                  <h3 className="text-2xl font-heading text-off-white">
+                  <h3 className="text-xl md:text-2xl font-heading text-off-white">
                     {currentBeat.title}
                   </h3>
-                  <div className="flex gap-4 text-sm text-off-white/60">
+                  <div className="flex gap-4 text-xs md:text-sm text-off-white/60">
                     <span>{currentBeat.bpm} BPM</span>
                     <span>{currentBeat.duration}</span>
                   </div>
                 </div>
-                <div className="text-2xl font-heading text-money-green">
+                <div className="text-xl md:text-2xl font-heading text-money-green">
                   {currentBeat.price}
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 md:gap-4">
                 <button
                   onClick={() => playBeat(currentBeat)}
-                  className="w-12 h-12 rounded-full bg-money-green flex items-center justify-center hover:bg-gold-foil transition-colors"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-money-green flex items-center justify-center hover:bg-gold-foil transition-colors"
                 >
                   {isPlaying ? (
                     <svg
-                      width="24"
-                      height="24"
+                      width="20"
+                      height="20"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -136,8 +130,8 @@ export default function TheDrop() {
                     </svg>
                   ) : (
                     <svg
-                      width="24"
-                      height="24"
+                      width="20"
+                      height="20"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -155,11 +149,11 @@ export default function TheDrop() {
                 </div>
               </div>
 
-              <div className="mt-6 flex gap-3">
+              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
                 {currentBeat.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-off-white/5 text-off-white/60 text-xs rounded-full"
+                    className="px-2 md:px-3 py-1 bg-off-white/5 text-off-white/60 text-xs rounded-full"
                   >
                     #{tag}
                   </span>
@@ -168,41 +162,41 @@ export default function TheDrop() {
             </div>
           )}
 
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {beats.map((beat) => (
               <motion.div
                 key={beat.id}
                 whileHover={{ x: 4 }}
-                className={`flex justify-between items-center p-4 border-b border-off-white/10 hover:bg-off-white/5 cursor-pointer transition-colors ${
+                className={`flex justify-between items-center p-3 md:p-4 border-b border-off-white/10 hover:bg-off-white/5 cursor-pointer transition-colors ${
                   currentBeat && currentBeat.id === beat.id
-                    ? "border-l-2 border-l-money-green pl-3"
+                    ? "border-l-2 border-l-money-green pl-2 md:pl-3"
                     : ""
                 }`}
                 onClick={() => playBeat(beat)}
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 rounded-full bg-off-white/10 flex items-center justify-center">
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-off-white/10 flex items-center justify-center">
                     {currentBeat && currentBeat.id === beat.id && isPlaying ? (
                       <span className="block w-2 h-2 bg-money-green rounded-full animate-pulse"></span>
                     ) : (
-                      <span className="text-sm">{beat.id}</span>
+                      <span className="text-xs md:text-sm">{beat.id}</span>
                     )}
                   </div>
                   <div>
-                    <h3 className="font-heading text-off-white">
+                    <h3 className="text-sm md:text-base font-heading text-off-white">
                       {beat.title}
                     </h3>
-                    <div className="flex gap-4 text-xs text-off-white/60">
+                    <div className="flex gap-3 md:gap-4 text-[10px] md:text-xs text-off-white/60">
                       <span>{beat.bpm} BPM</span>
                       <span>{beat.duration}</span>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-6">
-                  <span className="font-heading text-money-green">
+                <div className="flex items-center gap-3 md:gap-6 ml-2">
+                  <span className="text-sm md:text-base font-heading text-money-green whitespace-nowrap">
                     {beat.price}
                   </span>
-                  <button className="px-3 py-1 border border-off-white/20 hover:border-money-green text-xs uppercase font-heading tracking-wider transition-colors">
+                  <button className="px-2 md:px-3 py-1 border border-off-white/20 hover:border-money-green text-[10px] md:text-xs uppercase font-heading tracking-wider transition-colors">
                     Buy
                   </button>
                 </div>
@@ -216,7 +210,7 @@ export default function TheDrop() {
             href="#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-gold-foil text-black font-heading py-3 px-8 rounded-sm uppercase tracking-wider"
+            className="inline-block bg-gold-foil text-black font-heading py-2 md:py-3 px-6 md:px-8 rounded-sm uppercase tracking-wider text-sm md:text-base"
           >
             Custom Order
           </motion.a>
