@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MASK.ON — Where Art, Code & Culture Break the Mold
+
+A creative portfolio website that embodies the tension between authenticity and performance, luxury and struggle, grit and digital precision. Inspired by trap aesthetics and the ethos of "Mask Off".
+
+## Concept
+
+MASK.ON is a visual mixtape at the intersection of art, code, and culture. It's not just a website — it's a digital expression of identity, creativity, and the hustle.
+
+## Features
+
+- **Striking Visual Design**: Trap-inspired aesthetics with a bold color palette of Jet Black, Money Green, Gold Foil, Neon Purple, and Off-White
+- **Interactive Portfolio**: Showcase your visual art, music, and code projects
+- **The Drop**: A minimalist shop/beat store with audio playback
+- **Custom Animations**: Glitch effects, smooth scrolling, and magnetic cursor
+- **Responsive Layout**: Looks great on all devices
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, TailwindCSS
+- **Animation**: Framer Motion
+- **Audio**: WaveSurfer.js (placeholder)
+- **3D Effects**: React Three Fiber / Drei (placeholder)
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Customization
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Replace placeholder content in components with your own work
+- Add actual images to `/public/` directory
+- Customize colors in `tailwind.config.js`
+- Modify animations in Framer Motion components
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Credits
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Design inspired by trap aesthetics, particularly the concept of "Mask Off"
+- Font pairings: Anton (headings), Space Grotesk (body), Inter (alternative)
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+_"Took the mask off, still me"_
